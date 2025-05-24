@@ -15,6 +15,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NODE_ENV === 'production'
+      ? 'https://khansufiyanmirza.github.io/solar'  // Replace 'your-username' with your actual GitHub username
+      : 'http://localhost:3000'
+  ),
   title: "Nalanda Inverter - Premium Solar Panels & Inverters",
   description: "Leading wholesaler and retailer of Luminous solar panels and inverters. Quality solar solutions for installers, retailers, and homeowners.",
 };

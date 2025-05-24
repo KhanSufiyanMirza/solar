@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 
 export default function Hero() {
   const { theme } = useTheme();
+  const imagePath = `${process.env.NODE_ENV === 'production' ? '/solar' : ''}/hero-bg.jpg`;
 
   return (
     <section id="home" className="relative min-h-[calc(100vh-4rem)] flex items-center overflow-hidden">
@@ -24,7 +25,7 @@ export default function Hero() {
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
-            src="/hero-bg.jpg"
+            src={imagePath}
             alt="Solar panels installation"
             fill
             className={`object-cover scale-[1.02] transition-all duration-1000 ${

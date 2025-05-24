@@ -3,30 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { useTheme } from '../ThemeProvider';
-
-const products = [
-	{
-		title: 'Solar Panels',
-		description:
-			'High-efficiency Luminous solar panels for maximum power generation',
-		image: '/products/solar-panel.jpg',
-	},
-	{
-		title: 'Solar Inverters',
-		description: 'Reliable Luminous inverters for seamless power conversion',
-		image: '/products/inverter.jpg',
-	},
-	{
-		title: 'Solar Batteries',
-		description: 'High-capacity Luminous batteries for reliable power storage',
-		image: '/products/batteries.jpg', 
-	},
-	// {
-	// 	title: 'Complete Solar Systems',
-	// 	description: 'Integrated solar solutions for homes and businesses',
-	// 	image: '/products/solar-system.jpg',
-	// },
-];
+import { usePathname } from 'next/navigation';
 
 export default function Products() {
 	const ref = useRef(null);
@@ -34,6 +11,31 @@ export default function Products() {
 	const { theme } = useTheme();
 	const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
 	const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
+	const pathname = usePathname();
+
+	const products = [
+		{
+			title: 'Solar Panels',
+			description:
+				'High-efficiency Luminous solar panels for maximum power generation',
+			image: `${process.env.NODE_ENV === 'production' ? '/solar' : ''}/products/solar-panel.jpg`,
+		},
+		{
+			title: 'Solar Inverters',
+			description: 'Reliable Luminous inverters for seamless power conversion',
+			image: `${process.env.NODE_ENV === 'production' ? '/solar' : ''}/products/inverter.jpg`,
+		},
+		{
+			title: 'Solar Batteries',
+			description: 'High-capacity Luminous batteries for reliable power storage',
+			image: `${process.env.NODE_ENV === 'production' ? '/solar' : ''}/products/batteries.jpg`,
+		},
+		// {
+		// 	title: 'Complete Solar Systems',
+		// 	description: 'Integrated solar solutions for homes and businesses',
+		// 	image: '/products/solar-system.jpg',
+		// },
+	];
 
 	const handleImageLoad = (title: string) => {
 		setLoadedImages((prev) => ({ ...prev, [title]: true }));
