@@ -3,7 +3,6 @@ import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { useTheme } from '../ThemeProvider';
-import { usePathname } from 'next/navigation';
 
 export default function Products() {
 	const ref = useRef(null);
@@ -11,7 +10,6 @@ export default function Products() {
 	const { theme } = useTheme();
 	const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
 	const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
-	const pathname = usePathname();
 
 	const products = [
 		{
