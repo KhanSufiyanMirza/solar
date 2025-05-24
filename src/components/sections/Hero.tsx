@@ -5,7 +5,6 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { useTheme } from '../ThemeProvider';
 import LightBulb from '../ui/LightBulb';
 import { motion } from 'framer-motion';
-import SolarAnimation from '../ui/SolarAnimation';
 
 export default function Hero() {
   const { theme } = useTheme();
