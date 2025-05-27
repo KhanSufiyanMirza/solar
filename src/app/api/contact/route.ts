@@ -6,9 +6,9 @@ const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
 const CONTACT_FROM_EMAIL = process.env.CONTACT_FROM_EMAIL ?? '';
 const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL ?? '';
 
-if (!SENDGRID_API_KEY || !CONTACT_FROM_EMAIL || !CONTACT_TO_EMAIL) {
-  throw new Error('Required environment variables are not set');
-}
+// if (!SENDGRID_API_KEY || !CONTACT_FROM_EMAIL || !CONTACT_TO_EMAIL) {
+//   throw new Error('Required environment variables are not set');
+// }
 
 // sgMail.setApiKey(SENDGRID_API_KEY);
 
