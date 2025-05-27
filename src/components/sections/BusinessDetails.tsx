@@ -2,8 +2,7 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { useTheme } from '../ThemeProvider';
-import { FaMedal, FaCertificate, FaMapMarkerAlt, FaCalendarAlt, FaUsers, FaMoneyBillWave, FaCreditCard } from 'react-icons/fa';
+import { FaMedal, FaCertificate, FaCalendarAlt, FaUsers, FaMoneyBillWave, FaCreditCard } from 'react-icons/fa';
 import { HiDocumentText } from 'react-icons/hi';
 
 const details = {
@@ -70,7 +69,6 @@ const paymentMethods = [
 export default function BusinessDetails() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const { theme } = useTheme();
 
   return (
     <section ref={ref} id="business-details" className="py-24 relative overflow-hidden bg-gray-50 dark:bg-gray-900">
