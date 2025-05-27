@@ -1,11 +1,66 @@
 'use client';
 import { motion, useInView } from 'framer-motion';
 import { FaWhatsapp, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 export default function Contact() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [formState, setFormState] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormState((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit form');
+      }
+
+      setSubmitStatus({
+        type: 'success',
+        message: 'Thank you for your message! We will get back to you soon.',
+      });
+      setFormState({ name: '', email: '', message: '' });
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: (error as Error).message || 'Failed to submit form',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section ref={ref} id="contact" className="py-24 relative overflow-hidden">
@@ -52,7 +107,7 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8"
           >
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Name
@@ -60,6 +115,10 @@ export default function Contact() {
                 <input
                   type="text"
                   id="name"
+                  name="name"
+                  value={formState.name}
+                  onChange={handleInputChange}
+                  required
                   className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 dark:focus:ring-orange-400 focus:border-transparent outline-none transition-all"
                   placeholder="Your name"
                 />
@@ -71,6 +130,10 @@ export default function Contact() {
                 <input
                   type="email"
                   id="email"
+                  name="email"
+                  value={formState.email}
+                  onChange={handleInputChange}
+                  required
                   className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 dark:focus:ring-orange-400 focus:border-transparent outline-none transition-all"
                   placeholder="your@email.com"
                 />
@@ -81,16 +144,37 @@ export default function Contact() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
+                  value={formState.message}
+                  onChange={handleInputChange}
+                  required
                   rows={4}
                   className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 dark:focus:ring-orange-400 focus:border-transparent outline-none transition-all resize-none"
                   placeholder="Your message"
                 />
               </div>
+              {submitStatus.type && (
+                <div
+                  className={`p-3 rounded-lg text-sm ${
+                    submitStatus.type === 'success'
+                      ? 'bg-green-100 text-green-700 dark:bg-green-800/30 dark:text-green-400'
+                      : 'bg-red-100 text-red-700 dark:bg-red-800/30 dark:text-red-400'
+                  }`}
+                >
+                  {submitStatus.message}
+                </div>
+              )}
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-orange-500 to-yellow-500 dark:from-orange-400 dark:to-yellow-400 text-white font-semibold py-3 rounded-lg hover:from-orange-600 hover:to-yellow-600 dark:hover:from-orange-500 dark:hover:to-yellow-500 transition-all duration-300 shadow-lg hover:shadow-xl"
+                disabled={isSubmitting}
+                className={`w-full bg-gradient-to-r from-orange-500 to-yellow-500 dark:from-orange-400 dark:to-yellow-400 text-white font-semibold py-3 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl
+                  ${
+                    isSubmitting
+                      ? 'opacity-75 cursor-not-allowed'
+                      : 'hover:from-orange-600 hover:to-yellow-600 dark:hover:from-orange-500 dark:hover:to-yellow-500'
+                  }`}
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </motion.div>
