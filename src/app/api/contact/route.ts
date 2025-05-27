@@ -2,7 +2,7 @@ import { type NextRequest } from 'next/server';
 import * as sgMail from '@sendgrid/mail';
 
 // Initialize SendGrid with API key
-const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
+// const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
 const CONTACT_FROM_EMAIL = process.env.CONTACT_FROM_EMAIL ?? '';
 const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL ?? '';
 
