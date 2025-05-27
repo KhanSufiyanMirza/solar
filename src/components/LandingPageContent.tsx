@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 const Hero = dynamic(() => import('@/components/sections/Hero'));
 const Products = dynamic(() => import('@/components/sections/Products'));
 const WhyUs = dynamic(() => import('@/components/sections/WhyUs'));
+const BusinessDetails = dynamic(() => import('@/components/sections/BusinessDetails'));
 const Contact = dynamic(() => import('@/components/sections/Contact'));
 
 export default function LandingPageContent() {
@@ -13,6 +14,7 @@ export default function LandingPageContent() {
       <Hero />
       <Products />
       <WhyUs />
+      <BusinessDetails />
       <Contact />
     </main>
   );

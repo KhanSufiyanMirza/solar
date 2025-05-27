@@ -101,9 +101,9 @@ const LightBulb = () => {
   };
 
   return (
-    <div className="absolute right-12 top-1/2 -translate-y-1/2 w-72 h-72 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem]">
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
       {/* Background Glow */}
-      <div className="absolute inset-0">
+      <div className="relative w-full h-full max-w-[28rem] max-h-[28rem]">
         <motion.div
           className={`absolute inset-0 bg-gradient-radial from-sky-400/40 via-sky-400/20 to-transparent dark:from-sky-400/30 dark:via-sky-400/15 blur-3xl`}
           animate={{

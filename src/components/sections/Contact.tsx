@@ -44,7 +44,7 @@ export default function Contact() {
           </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Contact Form */}
           <motion.div
             initial={{ x: -50, opacity: 0 }}
@@ -139,13 +139,32 @@ export default function Contact() {
                     <p className="text-gray-900 dark:text-white font-medium">info@nalandainverter.com</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-orange-500 to-yellow-500 flex items-center justify-center text-white">
-                    <FaMapMarkerAlt className="w-5 h-5" />
+                
+                {/* Address with Map */}
+                <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md space-y-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-orange-500 to-yellow-500 flex items-center justify-center text-white">
+                      <FaMapMarkerAlt className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm text-gray-600 dark:text-gray-400">Address</h4>
+                      <p className="text-gray-900 dark:text-white font-medium">
+                        Shop No -8, Arihant Plaza, Plot No -162, Near Suruchi Hotel, Mcch Society, Panvel-410206
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-sm text-gray-600 dark:text-gray-400">Address</h4>
-                    <p className="text-gray-900 dark:text-white font-medium">Mumbai, Maharashtra</p>
+                  
+                  {/* Embedded Map */}
+                  <div className="aspect-video w-full rounded-lg overflow-hidden shadow-md">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d942.9533456115991!2d73.11378571850725!3d18.988011099999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDU5JzE2LjgiTiA3M8KwMDYnNTEuOCJF!5e0!3m2!1sen!2sin!4v1653644101234!5m2!1sen!2sin"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
                   </div>
                 </div>
               </div>
