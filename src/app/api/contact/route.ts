@@ -10,7 +10,7 @@ if (!SENDGRID_API_KEY || !CONTACT_FROM_EMAIL || !CONTACT_TO_EMAIL) {
   throw new Error('Required environment variables are not set');
 }
 
-sgMail.setApiKey(SENDGRID_API_KEY);
+// sgMail.setApiKey(SENDGRID_API_KEY);
 
 export async function POST(req: NextRequest) {
   try {
